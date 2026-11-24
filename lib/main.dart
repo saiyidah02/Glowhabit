@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'provider/subscription_provider.dart';
+import 'screens/pro_screen.dart';
+import 'screens/profile_screen.dart';
+
 
 void main() {
-  runApp(const GlowHabitApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => SubscriptionProvider(),
+      child: const GlowHabitApp(),
+    ),
+  );
 }
 
 class GlowHabitApp extends StatelessWidget {
@@ -281,13 +292,11 @@ class _JourneyHubScreenState extends State<JourneyHubScreen> {
   }
 
   final List<Widget> _screens = [
-    const HomeDashboardScreen(), // 03. Home Dashboard
-    const VanityShelfScreen(),   // 04. Vanity Shelf
-    const DailyDiaryScreen(),    // 05. Daily Skin Diary
-    const SmartQuizScreen(),     // 06. Smart Analysis (Quiz)
-    const ProPaywallScreen(),    // 07. GlowHabit Pro (Paywall)
-    const DiagnosticResultScreen(), // 08. Diagnostic Result
-    const ProfileScreen(),       // 09. Profile Page
+    const HomeDashboardScreen(),
+    const VanityShelfScreen(),
+    const DailyDiaryScreen(),
+    const SmartQuizScreen(),
+    const ProScreen(),
   ];
 
   @override
@@ -631,214 +640,214 @@ class SmartQuizScreen extends StatelessWidget {
 // ==========================================
 // 07. GLOWHABIT PRO (PAYWALL) SCREEN
 // ==========================================
-class ProPaywallScreen extends StatelessWidget {
-  const ProPaywallScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFF170D28),
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF3F2B1D), Color(0xFF1F150D)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFFFFD700), width: 1.5),
-            ),
-            child: Column(
-              children: [
-                const Icon(Icons.star, color: Color(0xFFFFD700), size: 48),
-                const SizedBox(height: 12),
-                const Text(
-                  'Upgrade to GlowHabit Pro\n(RM6.90/mo)',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFFFD700)),
-                ),
-                const SizedBox(height: 20),
-                _buildFeatureRow('✨ Smart Skin Analysis Kit'),
-                _buildFeatureRow('📝 Custom Ingredients & Avoid List'),
-                _buildFeatureRow('🖨️ Print PDF Summary'),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-          SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFFD700),
-                foregroundColor: const Color(0xFF170D28),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-              child: const Text('Subscribe & Unlock 🔒', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFeatureRow(String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        children: [
-          const Icon(Icons.check, color: Color(0xFFFFD700), size: 18),
-          const SizedBox(width: 10),
-          Text(text, style: const TextStyle(color: Colors.white, fontSize: 14)),
-        ],
-      ),
-    );
-  }
-}
+// class ProPaywallScreen extends StatelessWidget {
+//   const ProPaywallScreen({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: const Color(0xFF170D28),
+//       padding: const EdgeInsets.all(16.0),
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           Container(
+//             padding: const EdgeInsets.all(24),
+//             decoration: BoxDecoration(
+//               gradient: const LinearGradient(
+//                 colors: [Color(0xFF3F2B1D), Color(0xFF1F150D)],
+//                 begin: Alignment.topLeft,
+//                 end: Alignment.bottomRight,
+//               ),
+//               borderRadius: BorderRadius.circular(20),
+//               border: Border.all(color: const Color(0xFFFFD700), width: 1.5),
+//             ),
+//             child: Column(
+//               children: [
+//                 const Icon(Icons.star, color: Color(0xFFFFD700), size: 48),
+//                 const SizedBox(height: 12),
+//                 const Text(
+//                   'Upgrade to GlowHabit Pro\n(RM6.90/mo)',
+//                   textAlign: TextAlign.center,
+//                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFFFD700)),
+//                 ),
+//                 const SizedBox(height: 20),
+//                 _buildFeatureRow('✨ Smart Skin Analysis Kit'),
+//                 _buildFeatureRow('📝 Custom Ingredients & Avoid List'),
+//                 _buildFeatureRow('🖨️ Print PDF Summary'),
+//               ],
+//             ),
+//           ),
+//           const SizedBox(height: 30),
+//           SizedBox(
+//             width: double.infinity,
+//             height: 50,
+//             child: ElevatedButton(
+//               onPressed: () {},
+//               style: ElevatedButton.styleFrom(
+//                 backgroundColor: const Color(0xFFFFD700),
+//                 foregroundColor: const Color(0xFF170D28),
+//                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//               ),
+//               child: const Text('Subscribe & Unlock 🔒', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+//
+//   Widget _buildFeatureRow(String text) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 6),
+//       child: Row(
+//         children: [
+//           const Icon(Icons.check, color: Color(0xFFFFD700), size: 18),
+//           const SizedBox(width: 10),
+//           Text(text, style: const TextStyle(color: Colors.white, fontSize: 14)),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // ==========================================
 // 08. DIAGNOSTIC RESULT SCREEN
 // ==========================================
-class DiagnosticResultScreen extends StatelessWidget {
-  const DiagnosticResultScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFF170D28),
-      padding: const EdgeInsets.all(16.0),
-      child: ListView(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: const Color(0xFF23143E),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('GlowHabit', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(color: const Color(0xFFFFD700), borderRadius: BorderRadius.circular(6)),
-                      child: const Text('PRO', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF170D28))),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                const Text('YOUR SKIN TYPE:', style: TextStyle(color: Color(0xFFB1A0D8), fontSize: 12)),
-                const SizedBox(height: 4),
-                const Text('Combination (Dehydrated)', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-                const Divider(color: Color(0xFF3F2B6B), height: 24),
-                const Text('Recommended:', style: TextStyle(color: Colors.greenAccent, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 4),
-                const Text('Hyaluronic Acid, Niacinamide', style: TextStyle(color: Colors.white)),
-                const SizedBox(height: 16),
-                const Text('Avoid:', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 4),
-                const Text('Harsh sulfates, drying alcohol', style: TextStyle(color: Colors.white)),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.picture_as_pdf),
-            label: const Text('Generate & Export PDF Summary'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF6B4FA1),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// class DiagnosticResultScreen extends StatelessWidget {
+//   const DiagnosticResultScreen({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: const Color(0xFF170D28),
+//       padding: const EdgeInsets.all(16.0),
+//       child: ListView(
+//         children: [
+//           Container(
+//             padding: const EdgeInsets.all(16),
+//             decoration: BoxDecoration(
+//               color: const Color(0xFF23143E),
+//               borderRadius: BorderRadius.circular(16),
+//             ),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     const Text('GlowHabit', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+//                     Container(
+//                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+//                       decoration: BoxDecoration(color: const Color(0xFFFFD700), borderRadius: BorderRadius.circular(6)),
+//                       child: const Text('PRO', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF170D28))),
+//                     ),
+//                   ],
+//                 ),
+//                 const SizedBox(height: 16),
+//                 const Text('YOUR SKIN TYPE:', style: TextStyle(color: Color(0xFFB1A0D8), fontSize: 12)),
+//                 const SizedBox(height: 4),
+//                 const Text('Combination (Dehydrated)', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+//                 const Divider(color: Color(0xFF3F2B6B), height: 24),
+//                 const Text('Recommended:', style: TextStyle(color: Colors.greenAccent, fontWeight: FontWeight.bold)),
+//                 const SizedBox(height: 4),
+//                 const Text('Hyaluronic Acid, Niacinamide', style: TextStyle(color: Colors.white)),
+//                 const SizedBox(height: 16),
+//                 const Text('Avoid:', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+//                 const SizedBox(height: 4),
+//                 const Text('Harsh sulfates, drying alcohol', style: TextStyle(color: Colors.white)),
+//               ],
+//             ),
+//           ),
+//           const SizedBox(height: 24),
+//           ElevatedButton.icon(
+//             onPressed: () {},
+//             icon: const Icon(Icons.picture_as_pdf),
+//             label: const Text('Generate & Export PDF Summary'),
+//             style: ElevatedButton.styleFrom(
+//               backgroundColor: const Color(0xFF6B4FA1),
+//               foregroundColor: Colors.white,
+//               padding: const EdgeInsets.symmetric(vertical: 14),
+//               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // ==========================================
 // 09. PROFILE PAGE SCREEN
 // ==========================================
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  bool _proStatus = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFF170D28),
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          const CircleAvatar(
-            radius: 40,
-            backgroundColor: Color(0xFF6B4FA1),
-            child: Icon(Icons.person, size: 50, color: Colors.white),
-          ),
-          const SizedBox(height: 12),
-          const Text('NUR JAMILA KHAYRIN', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
-          const SizedBox(height: 4),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFD700).withOpacity(0.2),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFFFFD700)),
-            ),
-            child: const Text('GLOWHABIT PRO MEMBER', style: TextStyle(color: Color(0xFFFFD700), fontSize: 11, fontWeight: FontWeight.bold)),
-          ),
-          const SizedBox(height: 24),
-          SwitchListTile(
-            title: const Text('Pro Status', style: TextStyle(color: Colors.white)),
-            value: _proStatus,
-            activeColor: const Color(0xFFFFD700),
-            onChanged: (val) => setState(() => _proStatus = val),
-          ),
-          _buildMenuItem(Icons.edit, 'Edit Profile', () {}),
-          _buildMenuItem(Icons.history, 'View Diagnostic History', () {}),
-          _buildMenuItem(Icons.settings, 'Settings', () {}),
-          _buildMenuItem(Icons.logout, 'Log Out', () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const SplashScreen()),
-            );
-          }, isRed: true),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMenuItem(IconData icon, String title, VoidCallback onTap, {bool isRed = false}) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
-        color: const Color(0xFF23143E),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: ListTile(
-        leading: Icon(icon, color: isRed ? Colors.redAccent : const Color(0xFFB1A0D8)),
-        title: Text(title, style: TextStyle(color: isRed ? Colors.redAccent : Colors.white)),
-        trailing: const Icon(Icons.chevron_right, color: Colors.grey),
-        onTap: onTap,
-      ),
-    );
-  }
-}
+// class ProfileScreen extends StatefulWidget {
+//   const ProfileScreen({super.key});
+//
+//   @override
+//   State<ProfileScreen> createState() => _ProfileScreenState();
+// }
+//
+// class _ProfileScreenState extends State<ProfileScreen> {
+//   bool _proStatus = true;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: const Color(0xFF170D28),
+//       padding: const EdgeInsets.all(16.0),
+//       child: Column(
+//         children: [
+//           const CircleAvatar(
+//             radius: 40,
+//             backgroundColor: Color(0xFF6B4FA1),
+//             child: Icon(Icons.person, size: 50, color: Colors.white),
+//           ),
+//           const SizedBox(height: 12),
+//           const Text('NUR JAMILA KHAYRIN', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+//           const SizedBox(height: 4),
+//           Container(
+//             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+//             decoration: BoxDecoration(
+//               color: const Color(0xFFFFD700).withOpacity(0.2),
+//               borderRadius: BorderRadius.circular(12),
+//               border: Border.all(color: const Color(0xFFFFD700)),
+//             ),
+//             child: const Text('GLOWHABIT PRO MEMBER', style: TextStyle(color: Color(0xFFFFD700), fontSize: 11, fontWeight: FontWeight.bold)),
+//           ),
+//           const SizedBox(height: 24),
+//           SwitchListTile(
+//             title: const Text('Pro Status', style: TextStyle(color: Colors.white)),
+//             value: _proStatus,
+//             activeColor: const Color(0xFFFFD700),
+//             onChanged: (val) => setState(() => _proStatus = val),
+//           ),
+//           _buildMenuItem(Icons.edit, 'Edit Profile', () {}),
+//           _buildMenuItem(Icons.history, 'View Diagnostic History', () {}),
+//           _buildMenuItem(Icons.settings, 'Settings', () {}),
+//           _buildMenuItem(Icons.logout, 'Log Out', () {
+//             Navigator.pushReplacement(
+//               context,
+//               MaterialPageRoute(builder: (context) => const SplashScreen()),
+//             );
+//           }, isRed: true),
+//         ],
+//       ),
+//     );
+//   }
+//
+//   Widget _buildMenuItem(IconData icon, String title, VoidCallback onTap, {bool isRed = false}) {
+//     return Container(
+//       margin: const EdgeInsets.only(bottom: 8),
+//       decoration: BoxDecoration(
+//         color: const Color(0xFF23143E),
+//         borderRadius: BorderRadius.circular(12),
+//       ),
+//       child: ListTile(
+//         leading: Icon(icon, color: isRed ? Colors.redAccent : const Color(0xFFB1A0D8)),
+//         title: Text(title, style: TextStyle(color: isRed ? Colors.redAccent : Colors.white)),
+//         trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+//         onTap: onTap,
+//       ),
+//     );
+//   }
+// }
